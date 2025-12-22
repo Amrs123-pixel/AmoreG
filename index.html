@@ -187,13 +187,14 @@ header {
     <div>
         <h2>Only for you ❤️</h2>
         <p>Enter our password</p>
-        <input type="password" id="747416">
+        <input type="password" id="pass">
         <br>
         <button onclick="unlock()">Enter</button>
     </div>
 </div>
 
 <div id="content" style="display:none">
+
 
 <header>❤️ our love</header>
 
@@ -340,11 +341,16 @@ This distance is temporary, but my love for you is forever.
 
 <script>
 function unlock() {
-    if (document.getElementById("pass").value === "ourlove") {
+    const entered = document.getElementById("pass").value;
+
+    if (entered === "747416") {
         document.getElementById("lock").style.display = "none";
         document.getElementById("content").style.display = "block";
+    } else {
+        alert("Wrong password 😅");
     }
 }
+
 
 let playing = false;
 const music = document.getElementById("music");
