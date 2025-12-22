@@ -117,7 +117,6 @@ header {
 .reaction {
     padding: 10px 15px;
     display: flex;
-    align-items: center;
     gap: 10px;
 }
 
@@ -177,7 +176,7 @@ header {
 
 <body>
 
-<!-- PASSWORD -->
+<!-- 🔐 PASSWORD -->
 <div id="lock">
     <div>
         <h2>Only for you ❤️</h2>
@@ -206,7 +205,6 @@ header {
 
 <div class="feed">
 
-<!-- PHOTO POSTS -->
 <script>
 const messages = [
 "Roms, every time I see this photo, ma-miss jud tika pag ayo. I love you so much, sobra pa sa words ❤️",
@@ -236,7 +234,7 @@ messages.forEach((msg, i) => {
 });
 </script>
 
-<!-- LOVE LETTER -->
+<!-- 💌 LOVE LETTER -->
 <div style="padding:20px; text-align:center;">
 <button onclick="toggleLetter()" style="background:#ff5a7a;color:white;border:none;padding:12px 20px;border-radius:25px;">
 💌 Open my letter
@@ -248,7 +246,7 @@ I choose you every day, and I always will.
 </div>
 </div>
 
-<!-- PROPOSAL BUTTON -->
+<!-- 💍 PROPOSAL BUTTON -->
 <div style="text-align:center; padding:30px;">
 <button onclick="openProposal()" style="background:black;color:white;padding:12px 25px;border-radius:30px;border:none;">
 💍 Something important
@@ -258,45 +256,58 @@ I choose you every day, and I always will.
 </div>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
-<audio id="music" loop src="when_i_met_you.mp3"></audio>
+
+<audio id="music" loop preload="auto">
+    <source src="when_i_met_you.mp3" type="audio/mpeg">
+</audio>
 
 </div>
 
-<!-- FULL SCREEN PROPOSAL -->
+<!-- 💍 FULL SCREEN PROPOSAL -->
 <div id="proposalOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom right,#ff758c,#ff7eb3);color:white;text-align:center;z-index:9999;">
-<h1 style="margin-top:25vh;">Roms… 💖</h1>
-<p>Will you choose me, today and always?</p>
-<button onclick="yesProposal()" style="padding:14px 25px;border:none;border-radius:30px;">YES ❤️</button>
+    <h1 style="margin-top:25vh;">Roms… 💖</h1>
+    <p style="font-size:1.2rem;">Will you choose me, today and always?</p>
+    <button onclick="yesProposal()" style="padding:14px 25px;border:none;border-radius:30px;font-size:1.1rem;">YES ❤️</button>
 </div>
 
 <script>
-// PASSWORD
+// 🔐 PASSWORD + AUTO MUSIC
 function unlock() {
     if (document.getElementById("pass").value === "747416") {
         document.getElementById("lock").style.display = "none";
         document.getElementById("content").style.display = "block";
+
+        const music = document.getElementById("music");
+        music.volume = 0.6;
+        music.play().catch(()=>{});
     }
 }
 
-// MUSIC
+// 🎵 MUSIC TOGGLE
 let playing = false;
 function toggleMusic() {
-    const m = document.getElementById("music");
-    playing ? m.pause() : m.play();
-    playing = !playing;
+    const music = document.getElementById("music");
+    if (!playing) {
+        music.play();
+        playing = true;
+    } else {
+        music.pause();
+        playing = false;
+    }
 }
 
-// COUNTDOWN
+// ⏳ COUNTDOWN
 const target = new Date("2026-03-23T00:00:00").getTime();
 setInterval(() => {
     const d = target - Date.now();
     const days = Math.floor(d / (1000*60*60*24));
     const hrs = Math.floor((d % (1000*60*60*24)) / (1000*60*60));
     const mins = Math.floor((d % (1000*60*60)) / (1000*60));
-    document.getElementById("timer").innerHTML = `${days} days ${hrs} hrs ${mins} mins`;
+    document.getElementById("timer").innerHTML =
+        `${days} days ${hrs} hrs ${mins} mins`;
 }, 1000);
 
-// HEART REACT
+// ❤️ HEART REACT
 function react(btn) {
     btn.nextElementSibling.innerText++;
     const h = document.createElement("div");
@@ -306,38 +317,51 @@ function react(btn) {
     setTimeout(()=>h.remove(),1000);
 }
 
-// TYPING EFFECT
-document.querySelectorAll(".typing").forEach(el=>{
+// ⌨️ TYPING EFFECT
+document.querySelectorAll(".typing").forEach(el => {
     const text = el.dataset.text;
     el.textContent = "";
-    let i=0;
-    const t=setInterval(()=>{
-        el.textContent += text[i++];
-        if(i>=text.length) clearInterval(t);
-    },40);
+    let i = 0;
+    const interval = setInterval(() => {
+        el.textContent += text.charAt(i++);
+        if (i >= text.length) clearInterval(interval);
+    }, 40);
 });
 
-// AUTO SCROLL
+// 📜 AUTO SCROLL STORY MODE
 let autoScroll = true;
-setTimeout(()=>{
-    setInterval(()=>{ if(autoScroll) window.scrollBy(0,1); },40);
-},3000);
-window.addEventListener("wheel",()=>autoScroll=false);
-window.addEventListener("touchstart",()=>autoScroll=false);
+setTimeout(() => {
+    setInterval(() => {
+        if (autoScroll) window.scrollBy(0, 1);
+    }, 40);
+}, 3000);
+window.addEventListener("wheel", () => autoScroll = false);
+window.addEventListener("touchstart", () => autoScroll = false);
 
-// LETTER
-function toggleLetter(){
-    const l=document.getElementById("letter");
-    l.style.display=l.style.display==="none"?"block":"none";
+// 💌 LETTER
+function toggleLetter() {
+    const l = document.getElementById("letter");
+    l.style.display = l.style.display === "none" ? "block" : "none";
 }
 
-// PROPOSAL
-function openProposal(){
-    document.getElementById("proposalOverlay").style.display="block";
+// 💍 PROPOSAL
+function openProposal() {
+    document.getElementById("proposalOverlay").style.display = "block";
 }
-function yesProposal(){
-    document.getElementById("proposalOverlay").innerHTML="<h1>She said YES 😭❤️</h1>";
+function yesProposal() {
+    document.getElementById("proposalOverlay").innerHTML =
+        "<h1 style='margin-top:30vh;'>She said YES 😭❤️</h1>";
 }
+
+// ❤️ FLOATING HEARTS
+setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+}, 900);
 </script>
 
 </body>
