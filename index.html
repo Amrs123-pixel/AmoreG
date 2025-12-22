@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +30,6 @@ body {
     border: none;
     width: 200px;
     text-align: center;
-    font-size: 1rem;
 }
 
 #lock button {
@@ -102,12 +100,8 @@ header {
     width: 100%;
 }
 
-.caption {
-    padding: 10px;
-}
-
 .chat {
-    padding: 20px;
+    padding: 10px 15px;
 }
 
 .bubble {
@@ -115,20 +109,26 @@ header {
     color: white;
     padding: 12px;
     border-radius: 15px;
-    margin-bottom: 10px;
-    max-width: 80%;
-    animation: fadeSlide 0.8s ease forwards;
+    max-width: 85%;
 }
 
-.bubble.me {
-    background: #ddd;
-    color: #333;
-    margin-left: auto;
+.reaction {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-@keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.heart-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.heart-count {
+    font-size: 0.9rem;
+    color: #555;
 }
 
 .music-btn {
@@ -143,7 +143,13 @@ header {
     cursor: pointer;
 }
 
-/* FLOATING HEARTS */
+/* animations */
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* floating hearts */
 .heart {
     position: fixed;
     bottom: -20px;
@@ -157,16 +163,31 @@ header {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-110vh); opacity: 0; }
 }
+
+/* flying heart */
+.fly-heart {
+    position: fixed;
+    color: #ff5a7a;
+    font-size: 20px;
+    animation: fly 1s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes fly {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-80px) scale(1.8); }
+}
 </style>
 </head>
 
 <body>
 
+<!-- 🔐 PASSWORD -->
 <div id="lock">
     <div>
         <h2>Only for you ❤️</h2>
         <p>Enter our password</p>
-        <input type="password" id="pass">
+        <input type="password" id="747416">
         <br>
         <button onclick="unlock()">Enter</button>
     </div>
@@ -189,25 +210,131 @@ header {
 </div>
 
 <div class="feed">
-    <div class="post">
-        <img src="img1.jpg">
-        <div class="caption"><b>us</b> missing you everyday ❤️</div>
-    </div>
-    <div class="post">
-        <img src="img2.jpg">
-        <div class="caption"><b>always</b> distance won’t stop us</div>
-    </div>
+
+<!-- PHOTO 1 -->
+<div class="post">
+<img src="picture1.jpg">
+<div class="chat"><div class="bubble">
+Roms, every time I see this photo, ma-miss jud tika pag ayo. I love you so much, sobra pa sa words ❤️
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
 </div>
 
-<div class="chat">
-    <div class="bubble">I miss you so much 🥺</div>
-    <div class="bubble me">I’m always here ❤️</div>
-    <div class="bubble">Can’t wait to hug you again</div>
+<!-- PHOTO 2 -->
+<div class="post">
+<img src="picture2.jpg">
+<div class="chat"><div class="bubble">
+Even if layo ta, roms, my heart stays with you. Ikaw jud akong pahulay ug kalipay 🥺
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
+</div>
+
+<!-- PHOTO 3 -->
+<div class="post">
+<img src="picture3.jpg">
+<div class="chat"><div class="bubble">
+Roms, I miss your smile, your voice, imong tanan. Loving you is the best thing I ever did 💕
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
+</div>
+
+<!-- PHOTO 4 -->
+<div class="post">
+<img src="picture4.jpg">
+<div class="chat"><div class="bubble">
+No distance can change what I feel for you, roms. Ikaw gihapon akong pili, everyday 🫶
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
+</div>
+
+<!-- PHOTO 5 -->
+<div class="post">
+<img src="picture5.jpg">
+<div class="chat"><div class="bubble">
+Roms, bisan layo ta karon, my love for you keeps growing. I miss you more than you know 😔❤️
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
+</div>
+
+<!-- PHOTO 6 -->
+<div class="post">
+<img src="picture6.jpg">
+<div class="chat"><div class="bubble">
+Every photo of us reminds me nga worth it tanan paghuwat, roms. I love you always 💌
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
+</div>
+
+<!-- PHOTO 7 -->
+<div class="post">
+<img src="picture7.jpg">
+<div class="chat"><div class="bubble">
+Roms, you’re my comfort bisan naa ta sa lain lugar. I miss you so much, my love 🥺
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
+</div>
+
+<!-- PHOTO 8 -->
+<div class="post">
+<img src="picture8.jpg">
+<div class="chat"><div class="bubble">
+LDR is hard, roms, but loving you makes it easier. Ikaw akong forever bisan unsa pa 💖
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
+</div>
+
+<!-- PHOTO 9 -->
+<div class="post">
+<img src="picture9.jpg">
+<div class="chat"><div class="bubble">
+Roms, until the day I can hug you again, this love will stay strong. I miss you and I love you endlessly ❤️🥺
+</div></div>
+<div class="reaction">
+<button class="heart-btn" onclick="react(this)">❤️</button>
+<span class="heart-count">0</span>
+</div>
+</div>
+
+<!-- 💍 FINAL SURPRISE -->
+<div id="surprise" style="display:none; padding:30px; text-align:center;">
+<h2>For you, roms 💖</h2>
+<p style="font-size:1.1rem; line-height:1.6;">
+Roms, if you reached this part, I just want you to know nga ikaw jud akong pinaka-love.  
+Bisan layo ta karon, my heart belongs to you always.  
+<br><br>
+This distance is temporary, but my love for you is forever.
+</p>
+<p style="font-size:2rem;">❤️🥺❤️</p>
+</div>
+
 </div>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
-
-<audio id="music" loop src="music.mp3"></audio>
+<audio id="music" loop src="APO Hiking Society - When I Met You (Official Lyric Video).mp3"></audio>
 
 </div>
 
@@ -226,36 +353,55 @@ function toggleMusic() {
     playing = !playing;
 }
 
-const target = new Date("2026-02-14").getTime();
+// ⏳ COUNTDOWN — March 23, 2026 (Days + Hours + Minutes)
+const target = new Date("2026-03-23T00:00:00").getTime();
+
 setInterval(() => {
     const now = new Date().getTime();
-    const d = target - now;
+    const distance = target - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) / (1000 * 60)
+    );
+
     document.getElementById("timer").innerHTML =
-        Math.floor(d / (1000*60*60*24)) + " days";
+        `${days} days ${hours} hrs ${minutes} mins`;
 }, 1000);
 
-// Floating hearts
-function createHeart() {
+
+function react(btn) {
+    const count = btn.nextElementSibling;
+    count.innerText = parseInt(count.innerText) + 1;
+
     const heart = document.createElement("div");
-    heart.className = "heart";
+    heart.className = "fly-heart";
     heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    const r = btn.getBoundingClientRect();
+    heart.style.left = r.left + "px";
+    heart.style.top = r.top + "px";
     document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
+    setTimeout(() => heart.remove(), 1000);
+}
+
+function createHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
 }
 setInterval(createHeart, 800);
 
-// Sparkles
-document.addEventListener("click", e => {
-    const s = document.createElement("div");
-    s.innerHTML = "✨";
-    s.style.position = "fixed";
-    s.style.left = e.clientX + "px";
-    s.style.top = e.clientY + "px";
-    s.style.animation = "spark 1s ease-out forwards";
-    document.body.appendChild(s);
-    setTimeout(() => s.remove(), 1000);
+window.addEventListener("scroll", () => {
+    const s = document.getElementById("surprise");
+    if (window.scrollY > document.body.scrollHeight - window.innerHeight - 150) {
+        s.style.display = "block";
+    }
 });
 </script>
 
