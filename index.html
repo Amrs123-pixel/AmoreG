@@ -78,9 +78,7 @@ header {
 
 @keyframes heartbeat {
     0% { transform: scale(1); }
-    25% { transform: scale(1.05); }
-    50% { transform: scale(1); }
-    75% { transform: scale(1.05); }
+    50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
@@ -112,6 +110,10 @@ header {
     max-width: 85%;
 }
 
+.typing {
+    border-right: 2px solid white;
+}
+
 .reaction {
     padding: 10px 15px;
     display: flex;
@@ -126,11 +128,6 @@ header {
     cursor: pointer;
 }
 
-.heart-count {
-    font-size: 0.9rem;
-    color: #555;
-}
-
 .music-btn {
     position: fixed;
     bottom: 20px;
@@ -143,7 +140,6 @@ header {
     cursor: pointer;
 }
 
-/* animations */
 @keyframes fadeSlide {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -164,7 +160,6 @@ header {
     100% { transform: translateY(-110vh); opacity: 0; }
 }
 
-/* flying heart */
 .fly-heart {
     position: fixed;
     color: #ff5a7a;
@@ -182,7 +177,7 @@ header {
 
 <body>
 
-<!-- 🔐 PASSWORD -->
+<!-- PASSWORD -->
 <div id="lock">
     <div>
         <h2>Only for you ❤️</h2>
@@ -195,8 +190,7 @@ header {
 
 <div id="content" style="display:none">
 
-
-<header>❤️ Roms&Romyyy</header>
+<header>❤️ Roms & Romyyy</header>
 
 <div class="profile">
     <img src="profile.jpg">
@@ -212,203 +206,138 @@ header {
 
 <div class="feed">
 
-<!-- PHOTO 1 -->
-<div class="post">
-<img src="picture1.jpg">
-<div class="chat"><div class="bubble">
-Roms, every time I see this photo, ma-miss jud tika pag ayo. I love you so much, sobra pa sa words ❤️
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
+<!-- PHOTO POSTS -->
+<script>
+const messages = [
+"Roms, every time I see this photo, ma-miss jud tika pag ayo. I love you so much, sobra pa sa words ❤️",
+"Even if layo ta, roms, my heart stays with you. Ikaw jud akong pahulay ug kalipay 🥺",
+"Roms, I miss your smile, your voice nga maldita, imong tanan. Loving you is the best thing I ever did 💕",
+"No distance can change what I feel for you, roms. Ikaw gihapon akong pili-on everyday 🫶",
+"Roms, bisan layo ta karon, my love for you keeps growing. I miss you more than you know 😔❤️",
+"Every photo of us reminds me nga worth it tanan paghuwat, roms. I love you always 💌",
+"Roms, you’re my comfort bisan naa ta sa laing cities sa Philippines. I miss you so much 🥺",
+"LDR is hard roms, but loving you makes it easier. Ikaw akong forever bisan unsa pa 💖",
+"Roms, until the day I can hug you again, this love will stay strong. I miss you endlessly ❤️🥺"
+];
+
+messages.forEach((msg, i) => {
+    document.write(`
+    <div class="post">
+        <img src="picture${i+1}.jpg">
+        <div class="chat">
+            <div class="bubble typing" data-text="${msg}"></div>
+        </div>
+        <div class="reaction">
+            <button class="heart-btn" onclick="react(this)">❤️</button>
+            <span>0</span>
+        </div>
+    </div>
+    `);
+});
+</script>
+
+<!-- LOVE LETTER -->
+<div style="padding:20px; text-align:center;">
+<button onclick="toggleLetter()" style="background:#ff5a7a;color:white;border:none;padding:12px 20px;border-radius:25px;">
+💌 Open my letter
+</button>
+
+<div id="letter" style="display:none;background:white;padding:20px;border-radius:15px;margin-top:20px;">
+Roms, bisan layo ta karon, ikaw gihapon akong pahulay ug kalipay.
+I choose you every day, and I always will.
 </div>
 </div>
 
-<!-- PHOTO 2 -->
-<div class="post">
-<img src="picture2.jpg">
-<div class="chat"><div class="bubble">
-Even if layo ta, roms, my heart stays with you. Ikaw jud akong pahulay ug kalipay 🥺
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
-</div>
-</div>
-
-<!-- PHOTO 3 -->
-<div class="post">
-<img src="picture3.jpg">
-<div class="chat"><div class="bubble">
-Roms, I miss your smile, your voice nga maldita, imong tanan. Loving you is the best thing I ever did 💕
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
-</div>
-</div>
-
-<!-- PHOTO 4 -->
-<div class="post">
-<img src="picture4.jpg">
-<div class="chat"><div class="bubble">
-No distance can change what I feel for you, roms. Ikaw gihapon akong pili-on everyday 🫶
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
-</div>
-</div>
-
-<!-- PHOTO 5 -->
-<div class="post">
-<img src="picture5.jpg">
-<div class="chat"><div class="bubble">
-Roms, bisan layo ta karon, my love for you keeps growing. I miss you more than you know 😔❤️
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
-</div>
-</div>
-
-<!-- PHOTO 6 -->
-<div class="post">
-<img src="picture6.jpg">
-<div class="chat"><div class="bubble">
-Every photo of us reminds me nga worth it tanan paghuwat, roms. I love you always 💌
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
-</div>
-</div>
-
-<!-- PHOTO 7 -->
-<div class="post">
-<img src="picture7.jpg">
-<div class="chat"><div class="bubble">
-Roms, you’re my comfort bisan naa ta sa laing cities in the Philippines. I miss you so much, my love 🥺
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
-</div>
-</div>
-
-<!-- PHOTO 8 -->
-<div class="post">
-<img src="picture8.jpg">
-<div class="chat"><div class="bubble">
-LDR is hard roms, but loving you makes it easier. Ikaw akong forever bisan unsa pa 💖
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
-</div>
-</div>
-
-<!-- PHOTO 9 -->
-<div class="post">
-<img src="picture9.jpg">
-<div class="chat"><div class="bubble">
-Roms, until the day I can hug you again, this love will stay strong. I miss you and I love you endlessly ❤️🥺
-</div></div>
-<div class="reaction">
-<button class="heart-btn" onclick="react(this)">❤️</button>
-<span class="heart-count">0</span>
-</div>
-</div>
-
-<!-- 💍 FINAL SURPRISE -->
-<div id="surprise" style="display:none; padding:30px; text-align:center;">
-<h2>For you, roms 💖</h2>
-<p style="font-size:1.1rem; line-height:1.6;">
-Roms, if you reached this part, I just want you to know nga ikaw jud akong pinaka-love.  
-Bisan layo ta karon, my heart belongs to you always.  
-<br><br>
-This distance is temporary, but my love for you is forever.
-</p>
-<p style="font-size:2rem;">❤️🥺❤️</p>
+<!-- PROPOSAL BUTTON -->
+<div style="text-align:center; padding:30px;">
+<button onclick="openProposal()" style="background:black;color:white;padding:12px 25px;border-radius:30px;border:none;">
+💍 Something important
+</button>
 </div>
 
 </div>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
-<audio id="music" loop src="APO Hiking Society - When I Met You (Official Lyric Video).mp3"></audio>
+<audio id="music" loop src="when_i_met_you.mp3"></audio>
 
 </div>
 
-<script>
-function unlock() {
-    const entered = document.getElementById("pass").value;
+<!-- FULL SCREEN PROPOSAL -->
+<div id="proposalOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom right,#ff758c,#ff7eb3);color:white;text-align:center;z-index:9999;">
+<h1 style="margin-top:25vh;">Roms… 💖</h1>
+<p>Will you choose me, today and always?</p>
+<button onclick="yesProposal()" style="padding:14px 25px;border:none;border-radius:30px;">YES ❤️</button>
+</div>
 
-    if (entered === "747416") {
+<script>
+// PASSWORD
+function unlock() {
+    if (document.getElementById("pass").value === "747416") {
         document.getElementById("lock").style.display = "none";
         document.getElementById("content").style.display = "block";
-    } else {
-        alert("Wrong password 😅");
     }
 }
 
-
+// MUSIC
 let playing = false;
-const music = document.getElementById("music");
 function toggleMusic() {
-    playing ? music.pause() : music.play();
+    const m = document.getElementById("music");
+    playing ? m.pause() : m.play();
     playing = !playing;
 }
 
-// ⏳ COUNTDOWN — March 23, 2026 (Days + Hours + Minutes)
+// COUNTDOWN
 const target = new Date("2026-03-23T00:00:00").getTime();
-
 setInterval(() => {
-    const now = new Date().getTime();
-    const distance = target - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor(
-        (distance % (1000 * 60 * 60)) / (1000 * 60)
-    );
-
-    document.getElementById("timer").innerHTML =
-        `${days} days ${hours} hrs ${minutes} mins`;
+    const d = target - Date.now();
+    const days = Math.floor(d / (1000*60*60*24));
+    const hrs = Math.floor((d % (1000*60*60*24)) / (1000*60*60));
+    const mins = Math.floor((d % (1000*60*60)) / (1000*60));
+    document.getElementById("timer").innerHTML = `${days} days ${hrs} hrs ${mins} mins`;
 }, 1000);
 
-
+// HEART REACT
 function react(btn) {
-    const count = btn.nextElementSibling;
-    count.innerText = parseInt(count.innerText) + 1;
-
-    const heart = document.createElement("div");
-    heart.className = "fly-heart";
-    heart.innerHTML = "❤️";
-    const r = btn.getBoundingClientRect();
-    heart.style.left = r.left + "px";
-    heart.style.top = r.top + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 1000);
-}
-
-function createHeart() {
+    btn.nextElementSibling.innerText++;
     const h = document.createElement("div");
-    h.className = "heart";
+    h.className = "fly-heart";
     h.innerHTML = "❤️";
-    h.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(h);
-    setTimeout(() => h.remove(), 6000);
+    setTimeout(()=>h.remove(),1000);
 }
-setInterval(createHeart, 800);
 
-window.addEventListener("scroll", () => {
-    const s = document.getElementById("surprise");
-    if (window.scrollY > document.body.scrollHeight - window.innerHeight - 150) {
-        s.style.display = "block";
-    }
+// TYPING EFFECT
+document.querySelectorAll(".typing").forEach(el=>{
+    const text = el.dataset.text;
+    el.textContent = "";
+    let i=0;
+    const t=setInterval(()=>{
+        el.textContent += text[i++];
+        if(i>=text.length) clearInterval(t);
+    },40);
 });
+
+// AUTO SCROLL
+let autoScroll = true;
+setTimeout(()=>{
+    setInterval(()=>{ if(autoScroll) window.scrollBy(0,1); },40);
+},3000);
+window.addEventListener("wheel",()=>autoScroll=false);
+window.addEventListener("touchstart",()=>autoScroll=false);
+
+// LETTER
+function toggleLetter(){
+    const l=document.getElementById("letter");
+    l.style.display=l.style.display==="none"?"block":"none";
+}
+
+// PROPOSAL
+function openProposal(){
+    document.getElementById("proposalOverlay").style.display="block";
+}
+function yesProposal(){
+    document.getElementById("proposalOverlay").innerHTML="<h1>She said YES 😭❤️</h1>";
+}
 </script>
 
 </body>
