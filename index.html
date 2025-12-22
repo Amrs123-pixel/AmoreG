@@ -137,6 +137,7 @@ header {
     border-radius: 50px;
     padding: 12px 18px;
     cursor: pointer;
+    z-index: 1000;
 }
 
 @keyframes fadeSlide {
@@ -255,7 +256,8 @@ I choose you every day, and I always will.
 
 </div>
 
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
+<!-- 🎵 MUSIC BUTTON (USER TAP REQUIRED) -->
+<button class="music-btn" onclick="startMusic()">🎵</button>
 
 <audio id="music" loop preload="auto">
     <source src="when_i_met_you.mp3" type="audio/mpeg">
@@ -271,29 +273,19 @@ I choose you every day, and I always will.
 </div>
 
 <script>
-// 🔐 PASSWORD + AUTO MUSIC
+// 🔐 PASSWORD
 function unlock() {
     if (document.getElementById("pass").value === "747416") {
         document.getElementById("lock").style.display = "none";
         document.getElementById("content").style.display = "block";
-
-        const music = document.getElementById("music");
-        music.volume = 0.6;
-        music.play().catch(()=>{});
     }
 }
 
-// 🎵 MUSIC TOGGLE
-let playing = false;
-function toggleMusic() {
+// 🎵 MUSIC — iOS SAFE
+function startMusic() {
     const music = document.getElementById("music");
-    if (!playing) {
-        music.play();
-        playing = true;
-    } else {
-        music.pause();
-        playing = false;
-    }
+    music.volume = 0.7;
+    music.play();
 }
 
 // ⏳ COUNTDOWN
@@ -328,7 +320,7 @@ document.querySelectorAll(".typing").forEach(el => {
     }, 40);
 });
 
-// 📜 AUTO SCROLL STORY MODE
+// 📜 AUTO SCROLL
 let autoScroll = true;
 setTimeout(() => {
     setInterval(() => {
