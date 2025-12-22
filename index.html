@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Only For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    background: #fafafa;
+    color: #333;
+}
+
+/* PASSWORD SCREEN */
+#lock {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+    color: white;
+    text-align: center;
+}
+
+#lock input {
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    width: 200px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+#lock button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background: white;
+    color: #ff5a7a;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+header {
+    background: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+}
+
+.profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.countdown {
+    background: #ffe6ec;
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.05); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.feed {
+    max-width: 500px;
+    margin: auto;
+}
+
+.post {
+    background: white;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    animation: fadeSlide 0.8s ease forwards;
+}
+
+.post img {
+    width: 100%;
+}
+
+.caption {
+    padding: 10px;
+}
+
+.chat {
+    padding: 20px;
+}
+
+.bubble {
+    background: #ff5a7a;
+    color: white;
+    padding: 12px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    animation: fadeSlide 0.8s ease forwards;
+}
+
+.bubble.me {
+    background: #ddd;
+    color: #333;
+    margin-left: auto;
+}
+
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff5a7a;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 18px;
+    cursor: pointer;
+}
+
+/* FLOATING HEARTS */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    color: rgba(255, 90, 122, 0.6);
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="lock">
+    <div>
+        <h2>Only for you ❤️</h2>
+        <p>Enter our password</p>
+        <input type="password" id="pass">
+        <br>
+        <button onclick="unlock()">Enter</button>
+    </div>
+</div>
+
+<div id="content" style="display:none">
+
+<header>❤️ our love</header>
+
+<div class="profile">
+    <img src="profile.jpg">
+    <div>
+        <h3>My Favorite Person</h3>
+        <p>LDR but heart is home 💕</p>
+    </div>
+</div>
+
+<div class="countdown">
+    Seeing you again in <span id="timer"></span> 🥺
+</div>
+
+<div class="feed">
+    <div class="post">
+        <img src="img1.jpg">
+        <div class="caption"><b>us</b> missing you everyday ❤️</div>
+    </div>
+    <div class="post">
+        <img src="img2.jpg">
+        <div class="caption"><b>always</b> distance won’t stop us</div>
+    </div>
+</div>
+
+<div class="chat">
+    <div class="bubble">I miss you so much 🥺</div>
+    <div class="bubble me">I’m always here ❤️</div>
+    <div class="bubble">Can’t wait to hug you again</div>
+</div>
+
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+
+<audio id="music" loop src="music.mp3"></audio>
+
+</div>
+
+<script>
+function unlock() {
+    if (document.getElementById("pass").value === "ourlove") {
+        document.getElementById("lock").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    }
+}
+
+let playing = false;
+const music = document.getElementById("music");
+function toggleMusic() {
+    playing ? music.pause() : music.play();
+    playing = !playing;
+}
+
+const target = new Date("2026-02-14").getTime();
+setInterval(() => {
+    const now = new Date().getTime();
+    const d = target - now;
+    document.getElementById("timer").innerHTML =
+        Math.floor(d / (1000*60*60*24)) + " days";
+}, 1000);
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 800);
+
+// Sparkles
+document.addEventListener("click", e => {
+    const s = document.createElement("div");
+    s.innerHTML = "✨";
+    s.style.position = "fixed";
+    s.style.left = e.clientX + "px";
+    s.style.top = e.clientY + "px";
+    s.style.animation = "spark 1s ease-out forwards";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 1000);
+});
+</script>
+
+</body>
+</html>
