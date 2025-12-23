@@ -13,7 +13,7 @@ body {
     color: #333;
 }
 
-/* PASSWORD SCREEN */
+/* PASSWORD */
 #lock {
     height: 100vh;
     display: flex;
@@ -40,9 +40,9 @@ body {
     background: white;
     color: #ff5a7a;
     font-weight: bold;
-    cursor: pointer;
 }
 
+/* HEADER */
 header {
     background: white;
     padding: 15px;
@@ -53,80 +53,73 @@ header {
     top: 0;
 }
 
+/* PROFILE */
 .profile {
     display: flex;
     align-items: center;
     padding: 15px;
     background: white;
 }
-
 .profile img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
     margin-right: 15px;
-    object-fit: cover;
 }
 
+/* COUNTDOWN */
 .countdown {
     background: #ffe6ec;
     text-align: center;
     padding: 20px;
     font-weight: bold;
-    animation: heartbeat 1.5s infinite;
 }
 
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
+/* FEED */
 .feed {
     max-width: 500px;
     margin: auto;
 }
-
 .post {
     background: white;
     border: 1px solid #ddd;
     margin-bottom: 15px;
-    animation: fadeSlide 0.8s ease forwards;
 }
-
-.post img {
-    width: 100%;
-}
-
-.chat {
-    padding: 10px 15px;
-}
-
+.post img { width: 100%; }
+.chat { padding: 10px 15px; }
 .bubble {
     background: #ff5a7a;
     color: white;
     padding: 12px;
     border-radius: 15px;
-    max-width: 85%;
+}
+.typing { border-right: 2px solid white; }
+
+/* HEARTS */
+.reaction { padding: 10px 15px; display: flex; gap: 10px; }
+.heart-btn { font-size: 22px; background: none; border: none; }
+
+.heart {
+    position: fixed;
+    bottom: -20px;
+    animation: floatUp 6s linear infinite;
+    font-size: 20px;
+}
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-110vh); opacity: 0; }
+}
+.fly-heart {
+    position: fixed;
+    animation: fly 1s ease-out forwards;
+    font-size: 20px;
+}
+@keyframes fly {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-80px); }
 }
 
-.typing {
-    border-right: 2px solid white;
-}
-
-.reaction {
-    padding: 10px 15px;
-    display: flex;
-    gap: 10px;
-}
-
-.heart-btn {
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-}
-
+/* MUSIC */
 .music-btn {
     position: fixed;
     bottom: 20px;
@@ -136,48 +129,43 @@ header {
     border: none;
     border-radius: 50px;
     padding: 12px 18px;
-    cursor: pointer;
     z-index: 1000;
 }
 
-@keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* PICK ME CARDS */
+.emotion-section {
+    padding: 30px 15px;
+    text-align: center;
 }
-
-/* floating hearts */
-.heart {
-    position: fixed;
-    bottom: -20px;
-    color: rgba(255, 90, 122, 0.6);
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-    pointer-events: none;
+.jar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    margin: auto;
 }
-
-@keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-110vh); opacity: 0; }
+.jar-btn {
+    padding: 16px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    border: none;
+    font-weight: bold;
 }
-
-.fly-heart {
-    position: fixed;
-    color: #ff5a7a;
-    font-size: 20px;
-    animation: fly 1s ease-out forwards;
-    pointer-events: none;
+.pick-card {
+    display: none;
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 20px;
 }
-
-@keyframes fly {
-    from { opacity: 1; transform: translateY(0) scale(1); }
-    to { opacity: 0; transform: translateY(-80px) scale(1.8); }
-}
+.verse-ref { color: #ff5a7a; font-weight: bold; margin-top: 10px; }
+#fromMe { margin-top: 15px; font-style: italic; color: #555; }
 </style>
 </head>
 
 <body>
 
-<!-- 🔐 PASSWORD -->
+<!-- PASSWORD -->
 <div id="lock">
     <div>
         <h2>Only for you ❤️</h2>
@@ -201,159 +189,138 @@ header {
 </div>
 
 <div class="countdown">
-    LDR no more! <span id="timer"></span> 🥺
+    LDR no more! <span id="timer"></span>
 </div>
 
-<div class="feed">
+<div class="feed" id="feed"></div>
 
-<script>
-const messages = [
-"Roms, every time I see this photo, ma-miss jud tika pag ayo. I love you so much, sobra pa sa words ❤️",
-"Even if layo ta, roms, my heart stays with you. Ikaw jud akong pahulay ug kalipay 🥺",
-"Roms, I miss your smile, your voice nga maldita, imong tanan. Loving you is the best thing I ever did 💕",
-"No distance can change what I feel for you, roms. Ikaw gihapon akong pili-on everyday 🫶",
-"Roms, bisan layo ta karon, my love for you keeps growing. I miss you more than you know 😔❤️",
-"Every photo of us reminds me nga worth it tanan paghuwat, roms. I love you always 💌",
-"Roms, you’re my comfort bisan naa ta sa laing cities sa Philippines. I miss you so much 🥺",
-"LDR is hard roms, but loving you makes it easier. Ikaw akong forever bisan unsa pa 💖",
-"Roms, until the day I can hug you again, this love will stay strong. I miss you endlessly ❤️🥺"
-];
+<!-- 💌 OPEN WHEN -->
+<div class="emotion-section">
+<h2>💌 Open When…</h2>
 
-messages.forEach((msg, i) => {
-    document.write(`
-    <div class="post">
-        <img src="picture${i+1}.jpg">
-        <div class="chat">
-            <div class="bubble typing" data-text="${msg}"></div>
-        </div>
-        <div class="reaction">
-            <button class="heart-btn" onclick="react(this)">❤️</button>
-            <span>0</span>
-        </div>
-    </div>
-    `);
-});
-</script>
-
-<!-- 💌 LOVE LETTER -->
-<div style="padding:20px; text-align:center;">
-<button onclick="toggleLetter()" style="background:#ff5a7a;color:white;border:none;padding:12px 20px;border-radius:25px;">
-💌 Open my letter
-</button>
-
-<div id="letter" style="display:none;background:white;padding:20px;border-radius:15px;margin-top:20px;">
-Roms, bisan layo ta karon, ikaw gihapon akong pahulay ug kalipay.
-I choose you every day, and I always will.
-</div>
+<div class="jar-buttons">
+<button class="jar-btn" onclick="pickVerse('sad')">😔 Sad</button>
+<button class="jar-btn" onclick="pickVerse('doubt')">🤍 Doubting</button>
+<button class="jar-btn" onclick="pickVerse('anxious')">😟 Anxious</button>
+<button class="jar-btn" onclick="pickVerse('angry')">😠 Angry</button>
+<button class="jar-btn" onclick="pickVerse('lonely')">🥺 Lonely</button>
+<button class="jar-btn" onclick="pickVerse('happy')">😊 Happy</button>
+<button class="jar-btn" onclick="pickVerse('thankful')">🙏 Thankful</button>
 </div>
 
-<!-- 💍 PROPOSAL BUTTON -->
-<div style="text-align:center; padding:30px;">
-<button onclick="openProposal()" style="background:black;color:white;padding:12px 25px;border-radius:30px;border:none;">
-💍 Something important
-</button>
+<div id="card" class="pick-card">
+<div id="verseText"></div>
+<div id="verseRef" class="verse-ref"></div>
+<div id="fromMe"></div>
+</div>
 </div>
 
 </div>
 
-<!-- 🎵 MUSIC BUTTON (USER TAP REQUIRED) -->
 <button class="music-btn" onclick="startMusic()">🎵</button>
-
-<audio id="music" loop preload="auto">
-    <source src="when_i_met_you.mp3" type="audio/mpeg">
+<audio id="music" loop>
+<source src="when_i_met_you.mp3" type="audio/mpeg">
 </audio>
 
-</div>
-
-<!-- 💍 FULL SCREEN PROPOSAL -->
-<div id="proposalOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom right,#ff758c,#ff7eb3);color:white;text-align:center;z-index:9999;">
-    <h1 style="margin-top:25vh;">Roms… 💖</h1>
-    <p style="font-size:1.2rem;">Will you choose me, today and always?</p>
-    <button onclick="yesProposal()" style="padding:14px 25px;border:none;border-radius:30px;font-size:1.1rem;">YES ❤️</button>
-</div>
-
 <script>
-// 🔐 PASSWORD
+/* PASSWORD */
 function unlock() {
-    if (document.getElementById("pass").value === "747416") {
-        document.getElementById("lock").style.display = "none";
-        document.getElementById("content").style.display = "block";
+    if (pass.value === "747416") {
+        lock.style.display = "none";
+        content.style.display = "block";
     }
 }
 
-// 🎵 MUSIC — iOS SAFE
+/* MUSIC */
 function startMusic() {
-    const music = document.getElementById("music");
-    music.volume = 0.7;
-    music.play();
+    const m = document.getElementById("music");
+    m.volume = 0.7;
+    m.play();
 }
 
-// ⏳ COUNTDOWN
+/* COUNTDOWN */
 const target = new Date("2026-03-23T00:00:00").getTime();
-setInterval(() => {
+setInterval(()=>{
     const d = target - Date.now();
-    const days = Math.floor(d / (1000*60*60*24));
-    const hrs = Math.floor((d % (1000*60*60*24)) / (1000*60*60));
-    const mins = Math.floor((d % (1000*60*60)) / (1000*60));
-    document.getElementById("timer").innerHTML =
-        `${days} days ${hrs} hrs ${mins} mins`;
-}, 1000);
+    timer.innerText =
+    Math.floor(d/86400000)+" days "+
+    Math.floor(d%86400000/3600000)+" hrs "+
+    Math.floor(d%3600000/60000)+" mins";
+},1000);
 
-// ❤️ HEART REACT
-function react(btn) {
-    btn.nextElementSibling.innerText++;
-    const h = document.createElement("div");
-    h.className = "fly-heart";
-    h.innerHTML = "❤️";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),1000);
-}
-
-// ⌨️ TYPING EFFECT
-document.querySelectorAll(".typing").forEach(el => {
-    const text = el.dataset.text;
-    el.textContent = "";
-    let i = 0;
-    const interval = setInterval(() => {
-        el.textContent += text.charAt(i++);
-        if (i >= text.length) clearInterval(interval);
-    }, 40);
+/* POSTS */
+const msgs=[
+"Roms, every time I see this photo, ma-miss jud tika pag ayo ❤️",
+"Even if layo ta, roms, my heart stays with you 🥺",
+"Your smile is my favorite memory 💕",
+"I will always choose you 🫶",
+"I miss you more than you know 😔",
+"Worth it tanan paghuwat 💌",
+"Distance can’t erase us 🥺",
+"You are my forever 💖",
+"I love you endlessly ❤️"
+];
+msgs.forEach((m,i)=>{
+feed.innerHTML+=`
+<div class="post">
+<img src="picture${i+1}.jpg">
+<div class="chat"><div class="bubble typing" data-text="${m}"></div></div>
+<div class="reaction"><button class="heart-btn" onclick="react(this)">❤️</button><span>0</span></div>
+</div>`;
 });
 
-// 📜 AUTO SCROLL
-let autoScroll = true;
-setTimeout(() => {
-    setInterval(() => {
-        if (autoScroll) window.scrollBy(0, 1);
-    }, 40);
-}, 3000);
-window.addEventListener("wheel", () => autoScroll = false);
-window.addEventListener("touchstart", () => autoScroll = false);
+/* TYPING */
+document.querySelectorAll(".typing").forEach(el=>{
+let t=el.dataset.text,i=0;el.textContent="";
+let x=setInterval(()=>{el.textContent+=t[i++];if(i>=t.length)clearInterval(x);},40);
+});
 
-// 💌 LETTER
-function toggleLetter() {
-    const l = document.getElementById("letter");
-    l.style.display = l.style.display === "none" ? "block" : "none";
+/* HEART */
+function react(b){
+b.nextElementSibling.innerText++;
+let h=document.createElement("div");
+h.className="fly-heart";h.innerText="❤️";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),1000);
 }
 
-// 💍 PROPOSAL
-function openProposal() {
-    document.getElementById("proposalOverlay").style.display = "block";
-}
-function yesProposal() {
-    document.getElementById("proposalOverlay").innerHTML =
-        "<h1 style='margin-top:30vh;'>She said YES 😭❤️</h1>";
-}
+/* FLOATING HEARTS */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";h.innerText="❤️";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},900);
 
-// ❤️ FLOATING HEARTS
-setInterval(() => {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "❤️";
-    h.style.left = Math.random()*100 + "vw";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
-}, 900);
+/* VERSES + MESSAGES */
+const verses={
+sad:[["The Lord is close to the brokenhearted.","Psalm 34:18"]],
+doubt:[["Trust in the Lord with all your heart.","Proverbs 3:5"]],
+anxious:[["Do not be anxious about anything.","Philippians 4:6"]],
+angry:[["Be slow to anger.","James 1:19"]],
+lonely:[["Never will I leave you.","Hebrews 13:5"]],
+happy:[["Rejoice in the Lord always.","Philippians 4:4"]],
+thankful:[["Give thanks to the Lord, for He is good.","Psalm 136:1"]]
+};
+
+const fromMeMessages={
+sad:["Roms, I’m here with you."],
+doubt:["It’s okay to not have all the answers."],
+anxious:["Breathe, love. You’re safe."],
+angry:["Let’s pause together."],
+lonely:["You’re never alone."],
+happy:["Your smile means everything to me."],
+thankful:["I thank God for you every day."]
+};
+
+function pickVerse(e){
+const v=verses[e][0];
+verseText.innerText='"'+v[0]+'"';
+verseRef.innerText=v[1];
+fromMe.innerText=fromMeMessages[e][0];
+card.style.display="block";
+}
 </script>
 
 </body>
